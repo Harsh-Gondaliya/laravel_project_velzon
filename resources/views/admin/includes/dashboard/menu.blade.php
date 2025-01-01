@@ -68,6 +68,12 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('technology')}}" >
+                        <i class="ri-user-fill"></i> <span data-key="t-widgets">Technology </span>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <!-- Sidebar -->
