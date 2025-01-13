@@ -1,6 +1,6 @@
 @extends('admin.layout.auth')
 
-@section('content') 
+@section('content')
 
 <div class="auth-page-content">
     <div class="container">
@@ -17,7 +17,6 @@
             </div>
         </div>
         <!-- end row -->
-
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 col-xl-5">
                 <div class="card mt-4 card-bg-fill">
@@ -26,6 +25,19 @@
                         <div class="text-center mt-2">
                             <h5 class="text-primary">Welcome Back !</h5>
                             <p class="text-muted">Sign in to continue to Velzon.</p>
+                            @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         </div>
                         <div class="p-2 mt-4">
                             <form action="{{route('signin-check')}}" id="signin" method="POST">
@@ -54,6 +66,11 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Username or Email</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Enter username or email">
+                                    @error('email')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 </div>
 
                                 <div class="mb-3">
@@ -65,6 +82,11 @@
                                         <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" name="password" id="password">
                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                     </div>
+                                    @error('password')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                                 </div>
 
                                 <div class="form-check">
