@@ -1,6 +1,22 @@
 @extends('admin.layout.app')
 
 @section('content')
+
+@php
+    use Carbon\Carbon;
+
+    $timezone = Auth::guard('admin')->user()->timezone ?? 'UTC'; // Fallback to UTC if no timezone is set
+    $currentHour = Carbon::now($timezone)->hour;
+
+    if ($currentHour >= 5 && $currentHour < 12) {
+        $greeting = 'Good Morning';
+    } elseif ($currentHour >= 12 && $currentHour < 18) {
+        $greeting = 'Good Afternoon';
+    } else {
+        $greeting = 'Good Evening';
+    }
+@endphp
+
 <div class="page-content">
     <div class="container-fluid">
 
@@ -11,7 +27,7 @@
                         <div class="col-12">
                             <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                                 <div class="flex-grow-1">
-                                    <h4 class="fs-16 mb-1">Good Morning, Anna!</h4>
+                                    <h4 class="fs-16 mb-1">{{ $greeting }}, {{ Auth::guard('admin')->user()->name }} !</h4>
                                     <p class="text-muted mb-0">Here's what's happening with your store today.</p>
                                 </div>
                                 <div class="mt-3 mt-lg-0">

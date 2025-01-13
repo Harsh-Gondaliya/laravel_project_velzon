@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('designation', function (Blueprint $table) {
-            $table->id();
-            $table->string('designation');
-            $table->enum('status', ['A', 'I'])->comment('A for active, I for Inactive')->default('A');
-            $table->timestamps();
+        Schema::table('designations', function (Blueprint $table) {
+            $table->softDeletes('deleted_at');  
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('designation');
+        Schema::table('designations', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 };

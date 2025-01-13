@@ -1,4 +1,4 @@
-@extends('admin.layout.auth');
+@extends('admin.layout.auth')
 
 @section('content') 
 
@@ -18,26 +18,6 @@
         </div>
         <!-- end row -->
 
-        <!-- Notifications -->
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                @if(session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-            </div>
-        </div>
-        <!-- End Notifications -->
-
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 col-xl-5">
                 <div class="card mt-4 card-bg-fill">
@@ -50,6 +30,26 @@
                         <div class="p-2 mt-4">
                             <form action="{{route('signin-check')}}" id="signin" method="POST">
                                 @csrf
+
+                                <!-- Notifications -->
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12">
+                                            @if(session('success'))
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                    {{ session('success') }}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            @endif
+
+                                            @if(session('error'))
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                    {{ session('error') }}
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <!-- End Notifications -->
 
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Username or Email</label>

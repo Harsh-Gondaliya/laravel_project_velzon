@@ -14,9 +14,9 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Designation</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Technologies</h4>
                     <div class="flex-shrink-0">
-                        <a href="{{route('admin.create.designation')}}" class="btn btn-primary">Add Designation</a>
+                        <a href="{{route('admin.technology.create')}}" class="btn btn-primary">Add Technology</a>
                     </div>
                 </div><!-- end card header -->
         
@@ -29,18 +29,18 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
-                                        <th scope="col">Designation</th>
+                                        <th scope="col">Technology</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @if ($designation->count())
-                                    @foreach ($designation as $key => $item)
+                                    @if ($techs->count())
+                                    @foreach ($techs as $key => $item)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $item->designation }}</td>
+                                            <td>{{ $item->technology }}</td>
                                             <td>
                                                 @if ($item->status == 'A')
                                                     <span class="badge bg-success">Active</span>
@@ -49,14 +49,14 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.edit.designation', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                                <a href="{{ route('admin.delete.designation', $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                                <a href="{{ route('admin.technology.edit', $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                                <a href="{{ route('admin.technology.destroy', $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="4" class="text-center">No Designation Found</td>
+                                        <td colspan="4" class="text-center">No Technologies Found</td>
                                     </tr>
                                 @endif
                                 

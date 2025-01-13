@@ -15,6 +15,12 @@ class AuthController extends Controller
     public function signupCheck(AuthRequest $request){
         
         $user = $request->addUser();
+
+        if($user){
+            return redirect()->route('signup')->with('success', 'User created successfully');
+        } else {
+            return redirect()->route('signup')->with('error', 'User creation failed');
+        }
     }
 
     public function signin(){
@@ -23,10 +29,8 @@ class AuthController extends Controller
 
     public function signinCheck(Request $request){
 
-        // dd($request->all());
         $request->validate([
             'name'=> 'required|string',
-            // 'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
@@ -45,19 +49,8 @@ class AuthController extends Controller
         return redirect()->route('signin')->with('error', 'Invalid login details');
     }
 
-    public function dashboard(){
-        return view('admin.pages.dashboard.dashboard');
-    }
-
-    public function designation(){
-        return view('admin.pages.dashboard.designation');
-    }
-
-    public function createDesignation(){
-        return view('admin.pages.dashboard.add_designation');
-    }
-
-    public function storeDesignation(Request $request){
-       dd($request->all()); 
+    public function signout(){
+        Auth::guard('admin')->logout();
+        return redirect()->route('signin')->with('success','Successfully logged out');
     }
 }
